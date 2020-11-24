@@ -24,7 +24,8 @@ function App() {
   return(
     <div className="App">
       <h1>Ket qua thi dau vong 37 Ngoai Hang Anh</h1>
-      <Match/>
+      <Match logo1 = 'https://cdn.sportdataapi.com/images/soccer/teams/100/18.png' logo2 = 'https://cdn.sportdataapi.com/images/soccer/teams/100/19.png'/>
+      <Match logo1 = 'https://cdn.sportdataapi.com/images/soccer/teams/100/11.png' logo2 = 'https://cdn.sportdataapi.com/images/soccer/teams/100/12.png'/>
     </div>
   )
 }
