@@ -20,12 +20,12 @@ class App extends Component {
   }
 
   render(){
-    //let round = this.state.fixtures[1].round.round_id;
     return(
       <div className="App">
         <h1>Ket qua thi dau vong { this.state.fixtures.length > 0 && this.state.fixtures[1].round.name } Ngoai Hang Anh</h1>
         {
-          this.state.fixtures.length > 0 && this.state.fixtures.map((fixture, index) => <Match key = {index} logo1={fixture.home_team.logo} goal1={fixture.stats.home_score} logo2={fixture.away_team.logo} goal2={fixture.stats.away_score}/>)
+          this.state.fixtures.length > 0 && this.state.fixtures.map((fixture, index) => <Match key = {index} fixture = {fixture}/>)
+          //this.state.fixtures.length > 0 && this.state.fixtures.map((fixture, index) => <Match key = {index} logo1={fixture.home_team.logo} goal1={fixture.stats.home_score} logo2={fixture.away_team.logo} goal2={fixture.stats.away_score} status={fixture.status}/>)
         }
       </div>
     )

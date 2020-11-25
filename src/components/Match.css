@@ -1,0 +1,24 @@
+.Match{
+    transition: 0.2s;
+}
+
+.Match img{
+    height: 2rem;
+    width: 2rem;
+}
+
+.Match:hover{
+    background-color: bisque;
+}
+
+.Match-finish{
+    background-color: rgb(243, 240, 240);
+}
+
+.Score{
+    font-size: 1.5rem;
+}
+
+hr{
+    width: 8rem;
+}

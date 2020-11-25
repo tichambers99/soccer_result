@@ -1,14 +1,21 @@
 import { render } from '@testing-library/react';
 import React, {Component} from 'react';
+import './Match.css'
 
 class Match extends Component{
     render() {
+        let { fixture } = this.props;
+        let className = 'Match';
+        if(fixture.status.localeCompare('finished') == 0){
+            className += ' Match-finish';
+        }
         return(
-            <div className="Match" > 
-                <img src= {this.props.logo1} alt='Logo' style = {{height: '2rem', width: '2rem'}}></img>
-                <span style = {{fontSize: '30px'}}>{this.props.goal1} - {this.props.goal2}</span>
-                <img src= {this.props.logo2} alt='Logo' style = {{height: '2rem', width: '2rem'}}></img>
-                <hr style = {{width: '8rem'}}/>
+            <div className= {className} > 
+                <img src= {fixture.home_team.logo} alt='Logo'></img>
+                <span className="Score">{fixture.stats.home_score} - {fixture.stats.away_score}</span>
+                <img src= {fixture.away_team.logo} alt='Logo'></img>
+                <span>{fixture.status}</span>
+                <hr/>
             </div>
             )
     }
