@@ -3,8 +3,7 @@
 }
 
 .Match img{
-    height: 2rem;
-    width: 2rem;
+    max-width: 3rem;
 }
 
 .Match:hover{
