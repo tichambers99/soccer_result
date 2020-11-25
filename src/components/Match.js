@@ -5,9 +5,10 @@ class Match extends Component{
     render() {
         return(
             <div className="Match" > 
-                <img src= {this.props.logo1} alt='Logo' style = {{height: '50%'}}></img>
+                <img src= {this.props.logo1} alt='Logo' style = {{height: '2rem', width: '2rem'}}></img>
                 <span style = {{fontSize: '30px'}}>{this.props.goal1} - {this.props.goal2}</span>
-                <img src= {this.props.logo2} alt='Logo' style = {{height: '50%'}}></img>
+                <img src= {this.props.logo2} alt='Logo' style = {{height: '2rem', width: '2rem'}}></img>
+                <hr style = {{width: '8rem'}}/>
             </div>
             )
     }
