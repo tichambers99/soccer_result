@@ -95,18 +95,18 @@ class App extends Component {
     return(
       <div className="App">
         <Container>
-          <Row md='2'>
+          <select 
+            class="form-select" 
+            aria-label="League"
+            defaultValue={seasonId}
+            onClick={this.handleChangeLeague}
+          >
+            <option value="352">Premier League</option>
+            <option value="619">Seria</option>
+            <option value="496">Budesliga</option>
+          </select>
+          <Row md='2' style={{ marginTop: "2rem"}}>
             <Col xs="6">
-              <select 
-                class="form-select" 
-                aria-label="League"
-                defaultValue={seasonId}
-                onClick={this.handleChangeLeague}
-              >
-                <option value="352">Premier League</option>
-                <option value="619">Seria</option>
-                <option value="496">Budesliga</option>
-              </select>
               {
                 seasonId === "352" ? <h1>Premier League</h1> : 
                 seasonId === "619" ? <h1>Seria</h1> :

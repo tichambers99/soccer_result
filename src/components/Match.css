@@ -56,3 +56,7 @@ hr{
 .team-detail-title {
     text-align: center;
 }
+
+.team-row > tr {
+    cursor: pointer;
+}

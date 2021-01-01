@@ -84,7 +84,7 @@ const LeagueStanding = (props) => {
             <th>Point</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="team-row">
           {
             standingData.map((team, key) => {
               if (team) {
