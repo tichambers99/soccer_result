@@ -1,40 +1,48 @@
+/* CONTAINER */
+.container {
+  background-color: #f7f7f7;
+}
+/* NAVBAR */
+.navbar .navbar-child {
+  width: 100%;
+}
 .Match{
-    transition: all 0.2s ease-in;
-    cursor: pointer;
+  transition: all 0.2s ease-in;
+  cursor: pointer;
 }
 
-.Match img{
-    max-width: 3rem;
+.Match img, img {
+  max-width: 2rem;
 }
 
 .Match:hover{
-    background-color: bisque;
+  background-color: bisque;
 }
 
 .Match-finish{
-    background-color: rgb(243, 240, 240);
+  background-color: rgb(243, 240, 240);
 }
 
 .Score{
-    font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 hr{
-    width: 8rem;
+  width: 8rem;
 }
 
 /* MODAL INFOR OF MATCH */
 .match-title {
-	margin-top: 10rem;
+	margin-top: 6rem;
 }
 .match-title > p, .match-stats > p {
   font-weight: bold;
 }
 
 .match-team {
-	height: 160px;
+	height: 120px;
 }
-.match-team > h5 {
+.match-team > h6 {
 	margin-top: 0.5rem;
 }
 
@@ -54,9 +62,13 @@ hr{
 }
 
 .team-detail-title {
-    text-align: center;
+  text-align: center;
 }
 
 .team-row > tr {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+.table td, .table th {
+  padding: 0.25rem
 }

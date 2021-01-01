@@ -80,7 +80,7 @@ class MatchFinish extends Component {
 								<Col xs={{ size: 4}} className="match_statistics">
 									<div className="match-team">
 										<img src={fixture.home_team.logo} alt='Logo'/>
-										<h5>{fixture.home_team.name}</h5>
+										<h6>{fixture.home_team.name}</h6>
 									</div>
 									{
 										dataMatch && dataMatch.match_statistics &&
@@ -97,7 +97,7 @@ class MatchFinish extends Component {
 								<Col xs="4" className="match_statistics">
 									<div className="match-team">
 										<img src={fixture.away_team.logo} alt='Logo'/>
-										<h5>{fixture.away_team.name}</h5>
+										<h6>{fixture.away_team.name}</h6>
 									</div>
 									{
 										dataMatch && dataMatch.match_statistics &&
