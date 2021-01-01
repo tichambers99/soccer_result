@@ -5,78 +5,140 @@ import './App.css';
 import {Component} from 'react';
 
 import { Container, Row, Col } from 'reactstrap';
+import LeagueStanding from './components/LeagueStanding';
+
+const getData = async (seasonId, link) => {
+  try {
+    const response = await fetch(link);
+    const json = await response.json();
+    return json.data
+  } catch(e){
+    alert(e);
+  }
+}
+
+const getTeamInfo = (data) => {
+  let teamInfo = []
+  for (const match of data) {
+    const team1 = {
+      team_id: match.home_team.team_id,
+      team_name: match.home_team.name,
+      team_logo: match.home_team.logo
+    }
+    const team2 = {
+      team_id: match.away_team.team_id,
+      team_name: match.away_team.name,
+      team_logo: match.away_team.logo
+    }
+
+    teamInfo.push(team1, team2);
+  }
+
+  return teamInfo
+}
 
 class App extends Component {
   constructor() {
     super();
-    this.state = { fixtures: [] };
+    this.state = {
+      seasonId: "352", // Premier League: 352, SeriA: 619, Budesliga: 496
+      fixtures: [],
+      teamInfo: [] 
+    };
   }
 
-  async componentDidMount() {
-    try{
-      const response = await fetch(`https://api.npoint.io/9329b911b166f25cbef3`);
-      const json = await response.json();
-      this.setState({ fixtures: json.data });
-    }catch(e){
-      console.log(e);
+  componentDidMount() {
+    const { seasonId } = this.state;
+
+    const getSoccerData = async () => {
+      const link = `https://api.npoint.io/9329b911b166f25cbef3`
+      const data = await getData(seasonId, link);
+      this.setState({ fixtures: data})
+      
+      this.setState({ teamInfo: getTeamInfo(data)})
     }
+  
+    getSoccerData()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { seasonId } = this.state;
+    let link
+
+   if (prevState.seasonId !== seasonId) {
+    const getSoccerData = async () => {
+      if (seasonId === "352") {
+        link = `https://api.npoint.io/9329b911b166f25cbef3`
+      }
+      else if (seasonId === "619") {
+        link = `https://api.npoint.io/0dad2d7410db2fd377ce`
+      }
+      else {
+        link = `https://api.npoint.io/3d56bf5dcd584a13b4e5`
+      }
+      const data = await getData(seasonId, link);
+      this.setState({ fixtures: data})
+      this.setState({ teamInfo: getTeamInfo(data)})
+    }
+  
+    getSoccerData() 
+   }
+  }
+
+  handleChangeLeague = (e) => {
+    this.setState({ seasonId: e.target.value })
   }
 
   render(){
+    const { fixtures, seasonId, teamInfo } = this.state
+    
     return(
       <div className="App">
         <Container>
           <Row md='2'>
-            <Col>
-              <h1>Premier League</h1>
-              <h3>Round {this.state.fixtures.length > 0 && this.state.fixtures[0].round.name}</h3>
+            <Col xs="6">
+              <select 
+                class="form-select" 
+                aria-label="League"
+                defaultValue={seasonId}
+                onClick={this.handleChangeLeague}
+              >
+                <option value="352">Premier League</option>
+                <option value="619">Seria</option>
+                <option value="496">Budesliga</option>
+              </select>
+              {
+                seasonId === "352" ? <h1>Premier League</h1> : 
+                seasonId === "619" ? <h1>Seria</h1> :
+                <h1>Budesliga</h1>
+              }
+              <h3>Round {fixtures && fixtures.length > 0 && fixtures[0].round.name}</h3>
               <Row md='2'>
-                  <Col>
-                    <div>Finished Match</div>
-                    {
-                      this.state.fixtures.length > 0 && this.state.fixtures.map((fixture, index) => <MatchFinish key = {index} fixture = {fixture}/>)
-                      //this.state.fixtures.length > 0 && this.state.fixtures.map((fixture, index) => <Match key = {index} logo1={fixture.home_team.logo} goal1={fixture.stats.home_score} logo2={fixture.away_team.logo} goal2={fixture.stats.away_score} status={fixture.status}/>)
-                    }
-                  </Col>
-                  <Col>
-                    <div>Unstarted Match</div>
-                    {
-                      this.state.fixtures.length > 0 && this.state.fixtures.map((fixture, index) => <MatchNotFinish key = {index} fixture = {fixture}/>)
-                      //this.state.fixtures.length > 0 && this.state.fixtures.map((fixture, index) => <Match key = {index} logo1={fixture.home_team.logo} goal1={fixture.stats.home_score} logo2={fixture.away_team.logo} goal2={fixture.stats.away_score} status={fixture.status}/>)
-                    }
-                  </Col>
+                <Col>
+                  <div>Finished Match</div>
+                  {
+                    fixtures && fixtures.length > 0 && fixtures.map((fixture, index) => 
+                    <MatchFinish key={index} fixture={fixture} />)
+                  }
+                </Col>
+                <Col>
+                  <div>Unstarted Match</div>
+                  {
+                    fixtures && fixtures.length > 0 && fixtures.map((fixture, index) => 
+                    <MatchNotFinish key={index} fixture={fixture}/>)
+                  }
+                </Col>
               </Row>
+            </Col>
+
+            <Col xs="6">
+              <LeagueStanding teamInfo={teamInfo} seasonId={seasonId}/>
             </Col>
           </Row>
         </Container>
       </div>
     )
-    }
+  }
 }
 
 export default App;
-
-
-
- // componentDidMount() {
-  //   fetch(`https://api.coinmarketcap.com/v1/ticker/?limit=10`)
-  //     .then(res => res.json())
-  //     .then(json => this.setState({ data: json }));
-
-  //   // axios.get('https://api.npoint.io/9329b911b166f25cbef3').then(function (response) {
-  //   //   // handle success
-  //   //   //console.log(response.data);
-  //   //   fixtures = response.data.data;
-  //   //   console.log(fixtures);
-  //   // })
-  // }
-
-  // render(){
-  // var fixtures = [];
-  // <div className="App">
-  //   <h1>Ket qua thi dau vong 37 Ngoai Hang Anh</h1>
-  //   {
-  //     fixtures.map((fixture, index) => <Match key = {index} logo1={fixture.home_team.logo} logo2={fixture.away_team.logo}/>)
-  //   }
-  // </div>
-  // }

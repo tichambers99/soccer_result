@@ -1,5 +1,6 @@
 .Match{
-    transition: 0.2s;
+    transition: all 0.2s ease-in;
+    cursor: pointer;
 }
 
 .Match img{
@@ -20,4 +21,38 @@
 
 hr{
     width: 8rem;
+}
+
+/* MODAL INFOR OF MATCH */
+.match-title {
+	margin-top: 10rem;
+}
+.match-title > p, .match-stats > p {
+  font-weight: bold;
+}
+
+.match-team {
+	height: 160px;
+}
+.match-team > h5 {
+	margin-top: 0.5rem;
+}
+
+.match_statistics {
+	text-align: center;
+	padding: 0 5px;
+}
+
+/* MODAL INFOR OF TEAM */
+.team-title {
+	margin-top: 2rem;
+}
+
+.team_statistics {
+	text-align: center;
+	padding: 0 5px;
+}
+
+.team-detail-title {
+    text-align: center;
 }
