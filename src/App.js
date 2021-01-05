@@ -1,4 +1,3 @@
-import MatchFinish from './components/MatchFinish';
 import MatchNotFinish from './components/MatchNotFinish';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -6,6 +5,7 @@ import {Component} from 'react';
 
 import { Container, Row, Col } from 'reactstrap';
 import LeagueStanding from './components/LeagueStanding';
+import MyModal from './components/MyModal';
 
 const getData = async (seasonId, link) => {
   try {
@@ -91,7 +91,7 @@ class App extends Component {
 
   render(){
     const { fixtures, seasonId, teamInfo } = this.state
-    
+
     return(
       <div className="App">
         <Container>
@@ -117,9 +117,9 @@ class App extends Component {
                 <Col>
                   <div>Finished Match</div>
                   {
-                    fixtures && fixtures.length > 0 && fixtures.map((fixture, index) => 
-                    <MatchFinish key={index} fixture={fixture} />)
-                  }
+                    fixtures && fixtures.length > 0 && fixtures.filter((fixture) => fixture.status.localeCompare('finished') === 0).map((fixture, index) =>
+                    <MyModal keyId={index} fixture={fixture} />
+                  )}
                 </Col>
                 <Col>
                   <div>Unstarted Match</div>

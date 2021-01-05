@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 
 import { Table, Button, Modal, ModalBody, ModalFooter, Row, Col } from 'reactstrap';
+import LeagueStandingModal from './LeagueStandingModal';
 
 const LeagueStanding = (props) => {
   const [standingData, setStandingData] = useState([]);
-  const [modal, setModal] = useState(false)
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const [teamMatched, setTeamMatched] = useState({});
 
   useEffect(() => {
@@ -66,12 +67,12 @@ const LeagueStanding = (props) => {
       }
     }
 
-    setModal(!modal)
+    setIsOpenModal(!isOpenModal);
   }
 
   return (
     <div>
-      <Table hover>
+      <table>
         <thead>
           <tr>
             <th>Standing</th>
@@ -106,9 +107,11 @@ const LeagueStanding = (props) => {
             })
           }
         </tbody>
-      </Table>
+      </table>
 
-      <Modal isOpen={modal} toggle={() => setModal(!modal)}>
+      <LeagueStandingModal isOpen={isOpenModal} teamMatched={teamMatched} handleSetModalFalse={() => setIsOpenModal(false)}/>
+
+      {/* <Modal isOpen={modal} toggle={() => setModal(!modal)}>
         <ModalBody>
           <div className="team-detail-title">
             <h3>Detail</h3>
@@ -156,7 +159,7 @@ const LeagueStanding = (props) => {
         <ModalFooter>
           <Button color="primary" onClick={() => setModal(!modal)}>Oke</Button>
         </ModalFooter>
-      </Modal>
+      </Modal> */}
     </div>
   )
 }
