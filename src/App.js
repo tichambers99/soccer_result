@@ -3,7 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {Component} from 'react';
 
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+} from 'reactstrap';
 import LeagueStanding from './components/LeagueStanding';
 import MyModal from './components/MyModal';
 
@@ -43,7 +48,8 @@ class App extends Component {
     this.state = {
       seasonId: "352", // Premier League: 352, SeriA: 619, Budesliga: 496
       fixtures: [],
-      teamInfo: [] 
+      teamInfo: [],
+      isOpen: false
     };
   }
 
@@ -90,29 +96,39 @@ class App extends Component {
   }
 
   render(){
-    const { fixtures, seasonId, teamInfo } = this.state
+    const { fixtures, seasonId, teamInfo, isOpen } = this.state
 
     return(
       <div className="App">
         <Container>
-          <select 
-            class="form-select" 
-            aria-label="League"
-            defaultValue={seasonId}
-            onClick={this.handleChangeLeague}
-          >
-            <option value="352">Premier League</option>
-            <option value="619">Seria</option>
-            <option value="496">Budesliga</option>
-          </select>
-          <Row md='2' style={{ marginTop: "2rem"}}>
-            <Col xs="6">
+          <div className="navbar">
+            <Navbar color="light" light expand="md" className="navbar-child">
+              <NavbarBrand href="/">Home</NavbarBrand>
+              <NavbarToggler onClick={() => this.setState({ isOpen: !isOpen})} />
+              <Collapse isOpen={isOpen} navbar>
+                <Nav className="mr-auto" navbar>
+                <select 
+                  class="form-select" 
+                  aria-label="League"
+                  defaultValue={seasonId}
+                  onClick={this.handleChangeLeague}
+                >
+                  <option value="352">Premier League</option>
+                  <option value="619">Seria</option>
+                  <option value="496">Budesliga</option>
+                </select>
+                </Nav>
+              </Collapse>
+            </Navbar>
+          </div>
+          <Row style={{ marginTop: "2rem"}}>
+            <Col sm="4">
               {
-                seasonId === "352" ? <h1>Premier League</h1> : 
-                seasonId === "619" ? <h1>Seria</h1> :
-                <h1>Budesliga</h1>
+                seasonId === "352" ? <h3>Premier League</h3> : 
+                seasonId === "619" ? <h3>Seria</h3> :
+                <h3>Budesliga</h3>
               }
-              <h3>Round {fixtures && fixtures.length > 0 && fixtures[0].round.name}</h3>
+              <h5>Round {fixtures && fixtures.length > 0 && fixtures[0].round.name}</h5>
               <Row md='2'>
                 <Col>
                   <div>Finished Match</div>
@@ -130,8 +146,41 @@ class App extends Component {
                 </Col>
               </Row>
             </Col>
+            <Col sm="8">
+              <div className="content">
+                <h5>Matches Finish</h5>
+                <p>Look to the left</p>
+                <p>Click to see detail</p>
+                <p>Content</p>
+                <p>Content</p>
+                <p>Content</p>
+                <p>Content</p>
+                <p>Content</p>
+                <p>Content</p>
+                <p>Content</p>
+                <p>Content</p>
+                <p>Content</p>
+              </div>
+            </Col>
+          </Row>
 
-            <Col xs="6">
+          <Row style={{ marginTop: "1rem"}}>
+            <Col sm="4">
+              <h5>League Standing</h5>
+              <p>Look to the right</p>
+              <p>Click to see detail</p>
+              <p>Content</p>
+              <p>Content</p>
+              <p>Content</p>
+              <p>Content</p>
+              <p>Content</p>
+              <p>Content</p>
+              <p>Content</p>
+              <p>Content</p>
+              <p>Content</p>
+              <p>Content</p>
+            </Col>
+            <Col sm="8">
               <LeagueStanding teamInfo={teamInfo} seasonId={seasonId}/>
             </Col>
           </Row>
