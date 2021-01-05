@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react'
-
-import { Table, Button, Modal, ModalBody, ModalFooter, Row, Col } from 'reactstrap';
 import LeagueStandingModal from './LeagueStandingModal';
 
 const LeagueStanding = (props) => {
